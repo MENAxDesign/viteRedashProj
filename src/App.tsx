@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
-import { MovieFormComponent } from './components/movie-form/movie-form'
+import { MovieFormComponent } from './components/movie-form/movie-form';
+import { ArtListComponent } from './components/art-list/art-list';
 
 export function App() {
 
   return (
     <div className="App">
       <MovieFormComponent/>
+      <ArtListComponent/>
     </div>
   )
 }
