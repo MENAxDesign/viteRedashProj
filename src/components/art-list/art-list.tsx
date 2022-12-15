@@ -1,21 +1,24 @@
 import React, { useState } from "react";
-import { useChicagoArtData } from "../../api/artAPI";
-import { ArtData } from "../../models/artData";
 import { ArtItemComponent } from "../art-item/art-item";
 import styles from "./art-list.module.scss";
+import { useQuery } from "react-query";
+import { getChicagoArtData } from "../../utils/utils";
+import { ArtData } from "../../models/artData";
 
 export const ArtListComponent = () => {
-  const { data } = useChicagoArtData();
+  const { isLoading, error, data } = useQuery("artGalleryData", getChicagoArtData);
 
   return (
     <div>
-      {data.map((item) => {
-        return (
-          <React.Fragment key={item.id}>
-            <ArtItemComponent image_id={item.image_id} title={item.title}/>
-          </React.Fragment>
-        );
-      })}
+      {data &&
+        data.length > 0 &&
+        data.map((item: ArtData) => {
+          return (
+            <React.Fragment key={item.id}>
+              <ArtItemComponent image_id={item.image_id} title={item.title} />
+            </React.Fragment>
+          );
+        })}
     </div>
   );
 };
